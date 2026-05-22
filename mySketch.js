@@ -5,6 +5,8 @@ particles = [];
 let hexes = [];
 const R = 36;
 
+const flowerColors = ["#FF6B6B","#FF8E53","#FFC0CB","#FF69B4","#DA70D6","#9370DB","#FF4500","#FF6347"];
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   generateHexes();
@@ -20,7 +22,10 @@ function generateHexes() {
     for (let x = hexW / 2 + offset; x < width + hexW; x += hexW) {
       hexes.push({
         x, y,
-        col: color(random(200, 255), random(150, 220), random(0, 60))
+        col: color(random(200, 255), random(150, 220), random(0, 60)),
+        petalColor: random(flowerColors),
+        petalCount: floor(random(4, 7)),
+        flowerSize: random(8, 16)
       });
     }
   }
@@ -35,12 +40,28 @@ function drawHex(cx, cy, r) {
   endShape(CLOSE);
 }
 
+function drawFlower(cx, cy, petalColor, petalCount, flowerSize) {
+  // petals
+  fill(petalColor);
+  noStroke();
+  for (let i = 0; i < petalCount; i++) {
+    const angle = radians(360 / petalCount * i);
+    const px = cx + cos(angle) * flowerSize * 0.6;
+    const py = cy + sin(angle) * flowerSize * 0.6;
+    ellipse(px, py, flowerSize * 0.8, flowerSize * 0.8);
+  }
+  // center
+  fill(255, 220, 0);
+  ellipse(cx, cy, flowerSize * 0.7, flowerSize * 0.7);
+}
+
 function draw() {
   background(255);
   noStroke();
   for (let h of hexes) {
     fill(h.col);
     drawHex(h.x, h.y, R - 1);
+    drawFlower(h.x, h.y, h.petalColor, h.petalCount, h.flowerSize);
   }
 
   for (let i = particles.length - 1; i >= 0; i--) {
