@@ -4,6 +4,8 @@ particles = [];
 let pollens = [];
 let bees = [];
 let butterflies = [];
+let osc;
+let buzzing;
 
 let meadow;
 
@@ -13,12 +15,23 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+
   for (let i = 0; i < 8; i++) {
     bees.push(new Bee());
   }
   for (let i = 0; i < 5; i++) {
     butterflies.push(new Butterfly());
   }
+
+  osc = new p5.Oscillator('sine');
+  osc.freq(180);
+  osc.amp(0.05);
+  osc.start();
+
+  buzzing = new p5.Oscillator('square');
+  buzzing.freq(185);
+  buzzing.amp(0.02);
+  buzzing.start();
 }
 
 function draw() {
@@ -66,6 +79,13 @@ function mouseClicked() {
   } else {
     i = 0;
   }
+}
+
+function mouseMoved() {
+  let d = dist(mouseX, mouseY, width/2, height/2);
+  let vol = map(d, 0, width, 0.08, 0.02);
+  osc.amp(vol, 0.1);
+  buzzing.amp(vol * 0.4, 0.1);
 }
 
 function windowResized() {
@@ -153,14 +173,11 @@ class Bee {
     translate(this.x, this.y);
     rotate(this.angle);
     noStroke();
-    // body
     fill(255, 200, 0);
     ellipse(0, 0, this.size, this.size * 0.6);
-    // stripes
     fill(30, 30, 30, 180);
     rect(-this.size * 0.15, -this.size * 0.3, this.size * 0.15, this.size * 0.6);
     rect(this.size * 0.1, -this.size * 0.3, this.size * 0.15, this.size * 0.6);
-    // wings
     fill(200, 230, 255, 150);
     ellipse(-this.size * 0.1, -this.size * 0.5, this.size * 0.7, this.size * 0.4);
     ellipse(this.size * 0.1, -this.size * 0.5, this.size * 0.7, this.size * 0.4);
@@ -202,15 +219,12 @@ class Butterfly {
     rotate(this.angle);
     noStroke();
     let flap = sin(this.wingFlap) * 0.8;
-    // upper wings
     fill(red(this.col1), green(this.col1), blue(this.col1), 200);
     ellipse(-this.size * 0.4 * flap, -this.size * 0.2, this.size * 0.9, this.size * 0.7);
     ellipse(this.size * 0.4 * flap, -this.size * 0.2, this.size * 0.9, this.size * 0.7);
-    // lower wings
     fill(red(this.col1), green(this.col1), blue(this.col1), 160);
     ellipse(-this.size * 0.3 * flap, this.size * 0.2, this.size * 0.6, this.size * 0.5);
     ellipse(this.size * 0.3 * flap, this.size * 0.2, this.size * 0.6, this.size * 0.5);
-    // body
     fill(30, 30, 30);
     ellipse(0, 0, this.size * 0.15, this.size * 0.8);
     pop();
