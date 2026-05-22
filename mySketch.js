@@ -1,7 +1,4 @@
-lines = ["touch the screen","set the tone","make it work","craft the computation","code the thing","connect the dots","interact with the machine","push the text","pull the code","press on"]
-i = 0;
-particles = [];
-
+lines = lines = ["no bees no food","monarchs are vanishing","plant milkweed","skip the pesticides","migration routes lost","let your garden grow","small wings big work","plant native flowers","colony collapse","save the pollinators"]
 let hexes = [];
 const R = 36;
 
