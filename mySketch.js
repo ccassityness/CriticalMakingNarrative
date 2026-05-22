@@ -57,9 +57,13 @@ class Particle {
   show() {
     noStroke();
     textSize(this.size);
-    textFont("Courier");
+    textFont("Georgia");
     textAlign(CENTER, CENTER);
-    fill("green");
+    // dark green shadow
+    fill("#1B4332");
+    text(this.text, this.x + 2, this.y + 2);
+    // white text on top
+    fill("white");
     text(this.text, this.x, this.y);
   }
 }
