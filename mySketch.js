@@ -36,14 +36,13 @@ function drawHex(cx, cy, r) {
 }
 
 function draw() {
-  // Draw yellow honeycomb background
+  background(255);
   noStroke();
   for (let h of hexes) {
     fill(h.col);
     drawHex(h.x, h.y, R - 1);
   }
 
-  // Draw particles on top
   for (let i = particles.length - 1; i >= 0; i--) {
     particles[i].update();
     particles[i].show();
