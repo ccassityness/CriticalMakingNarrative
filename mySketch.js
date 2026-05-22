@@ -46,13 +46,15 @@ class Particle {
     this.vy = random(-1, 1);
     this.size = random(15, 50);
     this.text = text;
+    this.alpha = 255;
   }
   finished() {
-    return (this.x < 0 || this.x > windowWidth);
+    return this.alpha <= 0;
   }
   update() {
     this.x += this.vx;
     this.y += this.vy;
+    this.alpha -= 1.5;
   }
   show() {
     noStroke();
@@ -60,10 +62,10 @@ class Particle {
     textFont("Georgia");
     textAlign(CENTER, CENTER);
     // dark green shadow
-    fill("#1B4332");
+    fill(27, 67, 50, this.alpha);
     text(this.text, this.x + 2, this.y + 2);
     // white text on top
-    fill("white");
+    fill(255, 255, 255, this.alpha);
     text(this.text, this.x, this.y);
   }
 }
