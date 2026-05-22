@@ -13,8 +13,7 @@ function setup() {
 	background(50);
 }
 function draw() {
-//This overlay will always take us back to black - try changing it
-//The alpha of 3 controls the speed of the fade - try raising and lowering it
+	background(50);
 	//This moves the particles
   for (let i = particles.length - 1; i >= 0; i--) {
     particles[i].update();
@@ -24,8 +23,6 @@ function draw() {
       particles.splice(i, 1);
     }
   }
-	background(50,50,50,6);
-	
 }
 //This draws the word with each mouse click
 function mouseClicked() {
@@ -57,8 +54,7 @@ class Particle {
   }
 
   finished() {
-		//Change this to 255 if you reverse the fade
-    return (this.width < 0 || this.width > windowWidth);
+    return (this.x < 0 || this.x > windowWidth);
   }
 
   update() {
