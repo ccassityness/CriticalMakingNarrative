@@ -1,4 +1,4 @@
-lines = ["no bees no food","monarchs are vanishing","plant milkweed","skip the pesticides","migration routes lost","let your garden grow","small wings big work","plant native flowers","colony collapse","save the pollinators","no mow may","populations crashing","build a bee hotel","climate shifts routes","plant wildflowers","the hive is failing","butterflies feel heat first","leave the weeds","1 in 3 bites","plant coneflower"]
+lines = ["no bees no food","monarchs are vanishing","plant milkweed","skip the pesticides","migration routes lost","let your garden grow","small wings big work","plant native flowers","colony collapse","save the pollinators","no mow may","populations crashing","build a bee hotel","climate shifts routes","plant wildflowers","the hive is failing","butterflies feel heat first","leave the weeds","plant coneflower"]
 i = 0;
 particles = [];
 let pollens = [];
@@ -136,7 +136,7 @@ class Bee {
     this.angle = random(TWO_PI);
     this.speed = random(1, 2.5);
     this.wobble = 0;
-    this.size = random(12, 20);
+    this.size = random(25, 40);
   }
   update() {
     this.angle += random(-0.1, 0.1);
@@ -176,7 +176,7 @@ class Butterfly {
     this.speed = random(0.5, 1.5);
     this.wobble = 0;
     this.wingFlap = 0;
-    this.size = random(16, 28);
+    this.size = random(35, 55);
     this.col1 = color(random([
       [255, 100, 150],
       [255, 140, 0],
